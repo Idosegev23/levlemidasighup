@@ -2,7 +2,7 @@
 const WEBHOOK_URL = 'https://hook.eu2.make.com/h4n76ar8pjo8mu4cbtwywev50oic4q1c';
 const SUPABASE_URL = 'https://kyhlbkgkqrraaugosvya.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5aGxia2drcXJyYWF1Z29zdnlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ5MDQ5NjMsImV4cCI6MjA4MDQ4MDk2M30.Yz3k-m64C-Vlye01Qji69ELdYcWIcJilQ5VucGwZwIg';
-const SITE_URL = 'https://levlemida.co.il'; // Change this to your actual domain
+const SITE_URL = 'https://levlemidasighup.vercel.app';
 
 // Initialize Signature Pad
 let signaturePad;
