@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>תצוגה מקדימה - מסמך הרשמה - לב ללמידה</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Heebo', Arial, sans-serif;
+            direction: rtl;
+            color: #2D3748;
+            line-height: 1.7;
+            background: #ffffff;
+        }
+        
+        .document {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: #ffffff;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #7CB583 0%, #5a9a62 100%);
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo-text {
+            font-size: 42px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-subtitle {
+            font-size: 20px;
+            color: rgba(255,255,255,0.95);
+            font-weight: 400;
+        }
+        
+        .header-tagline {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        /* Document Info Bar */
+        .doc-info-bar {
+            background: #F5F1C1;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #FFC084;
+        }
+        
+        .doc-info-item {
+            font-size: 13px;
+            color: #4A5568;
+        }
+        
+        .doc-info-item strong {
+            color: #2D3748;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 40px;
+        }
+        
+        /* Section */
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #7CB583, #FFC084);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            margin-left: 15px;
+            flex-shrink: 0;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2D3748;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #FF96BB, #FFC084);
+            border-radius: 2px;
+        }
+        
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #7CB583, #FFC084);
+        }
+        
+        .info-card.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .info-card.highlight {
+            background: linear-gradient(135deg, #F5F1C1 0%, #fff9e6 100%);
+            border-color: #FFC084;
+        }
+        
+        .info-label {
+            font-size: 12px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        
+        .info-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2D3748;
+        }
+        
+        /* Policy Section */
+        .policy-container {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .policy-header {
+            text-align: center;
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            border-bottom: 2px dashed #BDBFE1;
+        }
+        
+        .policy-header h3 {
+            font-size: 18px;
+            color: #7CB583;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .policy-header p {
+            font-size: 14px;
+            color: #4A5568;
+            line-height: 1.8;
+        }
+        
+        .policy-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .policy-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .policy-item-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .policy-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #FF96BB, #FFC084);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 12px;
+            flex-shrink: 0;
+        }
+        
+        .policy-icon svg {
+            width: 14px;
+            height: 14px;
+            fill: #fff;
+        }
+        
+        .policy-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2D3748;
+        }
+        
+        .policy-item p {
+            font-size: 14px;
+            color: #4A5568;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        
+        .policy-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .policy-item li {
+            font-size: 14px;
+            color: #4A5568;
+            padding: 8px 0 8px 0;
+            padding-right: 28px;
+            position: relative;
+            border-bottom: 1px dotted #E2E8F0;
+        }
+        
+        .policy-item li:last-child {
+            border-bottom: none;
+        }
+        
+        .policy-item li::before {
+            content: '';
+            position: absolute;
+            right: 8px;
+            top: 16px;
+            width: 8px;
+            height: 8px;
+            background: #7CB583;
+            border-radius: 50%;
+        }
+        
+        .policy-highlight {
+            background: linear-gradient(135deg, #F5F1C1, #fff9e6);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 12px;
+            border-right: 4px solid #FFC084;
+        }
+        
+        .policy-highlight p {
+            margin: 0;
+            font-style: italic;
+            color: #5a6c7d;
+        }
+        
+        /* Signature Section */
+        .signature-section {
+            background: linear-gradient(135deg, #BDBFE1 0%, #a8aad4 100%);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 10px;
+        }
+        
+        .signature-section .section-header .section-number {
+            background: #fff;
+            color: #7CB583;
+        }
+        
+        .signature-section .section-title {
+            color: #fff;
+        }
+        
+        .signature-section .section-title::after {
+            background: rgba(255,255,255,0.5);
+        }
+        
+        .signature-declaration {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            color: #2D3748;
+            line-height: 1.7;
+        }
+        
+        .signature-box {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .signature-label {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 15px;
+        }
+        
+        .signature-image {
+            max-width: 280px;
+            height: 80px;
+            margin: 0 auto;
+            display: block;
+            border: 2px dashed #E2E8F0;
+            border-radius: 8px;
+        }
+        
+        .signature-details {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E2E8F0;
+        }
+        
+        .signature-detail {
+            text-align: center;
+        }
+        
+        .signature-detail .label {
+            font-size: 11px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .signature-detail .value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2D3748;
+            margin-top: 4px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2D3748;
+            padding: 30px 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .footer p {
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            .signature-section {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-text">לב ללמידה</div>
+                <div class="header-subtitle">טופס הרשמה לקבוצות</div>
+                <div class="header-tagline">מרחב רגוע, מותאם ואישי לכל ילד</div>
+            </div>
+        </header>
+        
+        <!-- Document Info Bar -->
+        <div class="doc-info-bar">
+            <div class="doc-info-item">
+                <strong>מספר טופס:</strong> REG-12345678
+            </div>
+            <div class="doc-info-item">
+                <strong>תאריך הרשמה:</strong> 5 בדצמבר 2024
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Student Details -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">פרטי התלמיד/ה</h2>
+                </div>
+                <div class="info-cards">
+                    <div class="info-card highlight">
+                        <div class="info-label">שם מלא</div>
+                        <div class="info-value">ישראל ישראלי</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">תאריך לידה</div>
+                        <div class="info-value">15/03/2018</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Parent Details -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">פרטי ההורה</h2>
+                </div>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-label">שם ההורה</div>
+                        <div class="info-value">שרה ישראלי</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">טלפון נייד</div>
+                        <div class="info-value">050-1234567</div>
+                    </div>
+                    <div class="info-card full-width">
+                        <div class="info-label">כתובת אימייל</div>
+                        <div class="info-value">sara@example.com</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Policy Section -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">מדיניות הרשמה, תשלום והתנהלות</h2>
+                </div>
+                <div class="policy-container">
+                    <div class="policy-header">
+                        <h3>לב ללמידה - מרחב רגוע, מותאם ואישי לכל ילד</h3>
+                        <p>בלב ללמידה אנחנו מאמינים שלכל ילד יש דרך ייחודית להתפתח, להבין ולגדול. המערכת שלנו מתאימה את עצמה לילד - ולא להפך. כדי לשמור על מרחב לימודי נעים, יציב ומכבד, נקבעה המדיניות הבאה.</p>
+                    </div>
+                    
+                    <div class="policy-item">
+                        <div class="policy-item-header">
+                            <div class="policy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            </div>
+                            <h4>תשלום חודשי</h4>
+                        </div>
+                        <ul>
+                            <li>התשלום מתבצע אחת לחודש עבור החודש הנוכחי.</li>
+                            <li>התשלום אינו יחסי ואינו תלוי במספר השיעורים שנכחו בפועל.</li>
+                            <li>הוא מייצג שמירה על מקום קבוע בקבוצה ועל רצף לימודי חשוב בהתפתחות הילד.</li>
+                            <li>במקרה של אי תשלום, ההשתתפות עשויה להיעצר עד להסדרת העניין.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="policy-item">
+                        <div class="policy-item-header">
+                            <div class="policy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+                            </div>
+                            <h4>נוכחות והיעדרויות</h4>
+                        </div>
+                        <ul>
+                            <li>היעדרות של ילד מכל סיבה אינה מזכה בהחזר, זיכוי או שיעור השלמה.</li>
+                            <li>במקרים חריגים שאינם מאפשרים את קיום כלל השיעורים (כמו מצבי חירום או כוח עליון), נמשיך את הלמידה במתכונת מקוונת.</li>
+                            <li>שיעור מקוון נחשב כשיעור מלא לכל דבר.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="policy-item">
+                        <div class="policy-item-header">
+                            <div class="policy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                            </div>
+                            <h4>שיעורים בחגים ובחופשות</h4>
+                        </div>
+                        <ul>
+                            <li>השיעורים מתקיימים כרגיל גם בתקופות חגים, למעט הודעה אחרת.</li>
+                            <li>לעיתים המפגשים יכללו פעילויות מותאמות לחג - חווייתיות, יצירתיות ומגוונות.</li>
+                            <li>אין החזר או קיזוז בגין חגים.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="policy-item">
+                        <div class="policy-item-header">
+                            <div class="policy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            </div>
+                            <h4>סביבה לימודית רגישה ומותאמת</h4>
+                        </div>
+                        <p>לב ללמידה פועל מתוך אהבה, סבלנות והבנה לעולמם של ילדים. אנו מקבלים תנועתיות, רגש, צורך בהפסקות, קשיים ואופי אישי - הכול חלק מהדרך שלהם.</p>
+                        <p>יחד עם זאת, כדי לשמור על מרחב מאפשר לכולם:</p>
+                        <ul>
+                            <li>אם התנהגות של ילד מקשה באופן ממשי על קיום השיעור הקבוצתי או פוגעת בחוויית הלמידה של אחרים, נעדכן את ההורים וניצור תכנית התנהלות משותפת.</li>
+                            <li>אם לאחר תהליך כזה ההתנהגות ממשיכה לפגוע במהלך השיעור, ייתכן שנבקש להפסיק את ההשתתפות בקבוצה.</li>
+                            <li>הפסקה כזו תתבצע רק בשיקול דעת מקצועי, רגיש ומתחשב.</li>
+                            <li>במקרה כזה לא יינתן החזר על החודש שבו הופסקה ההשתתפות.</li>
+                        </ul>
+                        <div class="policy-highlight">
+                            <p>המטרה שלנו היא תמיד אחת - לשמור על לב פתוח, על למידה שמחה, ועל מרחב פורה לכולם.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="policy-item">
+                        <div class="policy-item-header">
+                            <div class="policy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+                            </div>
+                            <h4>שימוש באפליקציה של לב ללמידה</h4>
+                        </div>
+                        <p>הקורס מלווה באפליקציית למידה שפיתחנו במיוחד עבור הילדים, כמערכת תרגול שמעמיקה את הלמידה ומאפשרת התקדמות עצמאית.</p>
+                        <ul>
+                            <li>השימוש באפליקציה הוא אישי ופרטי.</li>
+                            <li>אין להעביר שם משתמש או סיסמה לאדם אחר.</li>
+                            <li>שיתוף גישה פוגע בזכויות יוצרים ועלול לגרום לחסימת משתמש.</li>
+                            <li>במקרים חמורים תישקל פנייה משפטית, בהתאם לדין.</li>
+                        </ul>
+                        <div class="policy-highlight">
+                            <p>הכול מתוך רצון לשמור על המרחב הדיגיטלי בטוח ומוגן לכל תלמיד.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="policy-item">
+                        <div class="policy-item-header">
+                            <div class="policy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+                            </div>
+                            <h4>ביטול השתתפות</h4>
+                        </div>
+                        <ul>
+                            <li>הודעת ביטול נכנסת לתוקף בסוף אותו חודש.</li>
+                            <li>עזיבה באמצע חודש אינה מזכה בהחזר או קיזוז.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="policy-item">
+                        <div class="policy-item-header">
+                            <div class="policy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            </div>
+                            <h4>עדכון מדיניות</h4>
+                        </div>
+                        <p>בלב ללמידה שומרים על שקיפות מלאה. במידת הצורך מדיניות זו תעודכן ותיכנס לתוקף בתחילת החודש שלאחר העדכון.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Signature Section -->
+            <section class="section signature-section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">אישור וחתימה</h2>
+                </div>
+                
+                <div class="signature-declaration">
+                    אני, <strong>שרה ישראלי</strong>, מאשר/ת כי קראתי את מדיניות ההרשמה, התשלום וההתנהלות של לב ללמידה במלואה, ואני מסכים/ה לכל תנאיה. אני מבין/ה כי חתימתי מהווה התחייבות לתנאים המפורטים במסמך זה.
+                </div>
+                
+                <div class="signature-box">
+                    <div class="signature-label">חתימת ההורה</div>
+                    <div class="signature-image" style="display: flex; align-items: center; justify-content: center; color: #718096; font-style: italic;">
+                        [חתימה תופיע כאן]
+                    </div>
+                    <div class="signature-details">
+                        <div class="signature-detail">
+                            <div class="label">שם החותם</div>
+                            <div class="value">שרה ישראלי</div>
+                        </div>
+                        <div class="signature-detail">
+                            <div class="label">תאריך החתימה</div>
+                            <div class="value">05/12/2024</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p><strong>לב ללמידה</strong> - כל הזכויות שמורות</p>
+            <p>מסמך זה הופק אוטומטית ומהווה אישור רשמי להרשמה</p>
+        </footer>
+    </div>
+</body>
+</html>
+

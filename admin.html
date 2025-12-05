@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול הרשמות - לב ללמידה</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #F5F1C1;
+            --green: #7CB583;
+            --peach: #FFC084;
+            --pink: #FF96BB;
+            --lavender: #BDBFE1;
+            --text-dark: #2D3748;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            direction: rtl;
+            background: #f5f5f5;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+        
+        /* Login Screen */
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .login-logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--green);
+            margin-bottom: 10px;
+        }
+        
+        .login-subtitle {
+            color: var(--text-medium);
+            margin-bottom: 30px;
+        }
+        
+        .login-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-family: 'Heebo', sans-serif;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .login-input:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px rgba(124, 181, 131, 0.2);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(135deg, var(--green), var(--peach));
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 181, 131, 0.4);
+        }
+        
+        .login-error {
+            color: #E53E3E;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            min-height: 100vh;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, var(--green), var(--peach));
+            padding: 25px 40px;
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .admin-title span {
+            font-weight: 400;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .admin-content {
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Stats */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--text-medium);
+            font-size: 14px;
+        }
+        
+        /* Table */
+        .table-container {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid #E2E8F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .table-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-input {
+            padding: 10px 15px;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 14px;
+            min-width: 250px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: right;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        th {
+            background: #FAFAFA;
+            font-weight: 600;
+            color: var(--text-medium);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:hover {
+            background: #FAFAFA;
+        }
+        
+        .student-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .cert-link {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .cert-link:hover {
+            text-decoration: underline;
+        }
+        
+        .cert-link svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .copy-btn {
+            background: var(--cream);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: 'Heebo', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .copy-btn:hover {
+            background: var(--peach);
+        }
+        
+        .date-cell {
+            color: var(--text-medium);
+            font-size: 14px;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-medium);
+        }
+        
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            color: #E2E8F0;
+            margin-bottom: 20px;
+        }
+        
+        /* Loading */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(124, 181, 131, 0.2);
+            border-top: 3px solid var(--green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .admin-content {
+                padding: 15px;
+            }
+            
+            .table-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-input {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            th, td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <div class="login-logo">לב ללמידה</div>
+            <div class="login-subtitle">ניהול הרשמות</div>
+            <input type="password" class="login-input" id="passwordInput" placeholder="הזן סיסמה" autofocus>
+            <button class="login-btn" onclick="login()">כניסה</button>
+            <div class="login-error" id="loginError">סיסמה שגויה</div>
+        </div>
+    </div>
+    
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <header class="admin-header">
+            <div class="admin-title">
+                לב ללמידה
+                <span>| ניהול הרשמות</span>
+            </div>
+            <button class="logout-btn" onclick="logout()">התנתק</button>
+        </header>
+        
+        <div class="admin-content">
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalCount">0</div>
+                    <div class="stat-label">סה"כ נרשמים</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="thisMonthCount">0</div>
+                    <div class="stat-label">החודש</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="todayCount">0</div>
+                    <div class="stat-label">היום</div>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <div class="table-header">
+                    <h2 class="table-title">רשימת נרשמים</h2>
+                    <div class="search-box">
+                        <input type="text" class="search-input" id="searchInput" placeholder="חיפוש לפי שם..." oninput="filterTable()">
+                    </div>
+                </div>
+                
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner"></div>
+                </div>
+                
+                <div class="table-wrapper" id="tableWrapper" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>שם התלמיד/ה</th>
+                                <th>שם ההורה</th>
+                                <th>טלפון</th>
+                                <th>אימייל</th>
+                                <th>תאריך הרשמה</th>
+                                <th>קישור לאישור</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <p>אין הרשמות עדיין</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        const SUPABASE_URL = 'https://kyhlbkgkqrraaugosvya.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5aGxia2drcXJyYWF1Z29zdnlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ5MDQ5NjMsImV4cCI6MjA4MDQ4MDk2M30.Yz3k-m64C-Vlye01Qji69ELdYcWIcJilQ5VucGwZwIg';
+        const ADMIN_PASSWORD = '123456';
+        const SITE_URL = 'https://levlemida.co.il'; // Change this to your actual domain
+        
+        let allRegistrations = [];
+        
+        // Check if already logged in
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            showAdminPanel();
+        }
+        
+        // Login with Enter key
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') login();
+        });
+        
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === ADMIN_PASSWORD) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                showAdminPanel();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+        
+        function logout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+        
+        function showAdminPanel() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            loadRegistrations();
+        }
+        
+        async function loadRegistrations() {
+            try {
+                const response = await fetch(
+                    `${SUPABASE_URL}/rest/v1/registrations?select=*&order=created_at.desc`,
+                    {
+                        headers: {
+                            'apikey': SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                        }
+                    }
+                );
+                
+                allRegistrations = await response.json();
+                
+                document.getElementById('loadingSpinner').style.display = 'none';
+                
+                if (allRegistrations.length === 0) {
+                    document.getElementById('emptyState').style.display = 'block';
+                } else {
+                    document.getElementById('tableWrapper').style.display = 'block';
+                    renderTable(allRegistrations);
+                    updateStats();
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loadingSpinner').innerHTML = '<p>שגיאה בטעינת הנתונים</p>';
+            }
+        }
+        
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = data.map(reg => `
+                <tr>
+                    <td class="student-name">${reg.student_name}</td>
+                    <td>${reg.parent_name}</td>
+                    <td><a href="tel:${reg.phone}">${reg.phone}</a></td>
+                    <td><a href="mailto:${reg.email}">${reg.email}</a></td>
+                    <td class="date-cell">${formatDate(reg.created_at)}</td>
+                    <td>
+                        <a href="${SITE_URL}/certificate.html?id=${reg.student_slug}" target="_blank" class="cert-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                            צפייה
+                        </a>
+                        <button class="copy-btn" onclick="copyLink('${reg.student_slug}')">העתק קישור</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function updateStats() {
+            const total = allRegistrations.length;
+            const now = new Date();
+            const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+            const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            
+            const thisMonth = allRegistrations.filter(r => new Date(r.created_at) >= startOfMonth).length;
+            const today = allRegistrations.filter(r => new Date(r.created_at) >= startOfDay).length;
+            
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('thisMonthCount').textContent = thisMonth;
+            document.getElementById('todayCount').textContent = today;
+        }
+        
+        function filterTable() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allRegistrations.filter(reg => 
+                reg.student_name.toLowerCase().includes(search) ||
+                reg.parent_name.toLowerCase().includes(search) ||
+                reg.email.toLowerCase().includes(search) ||
+                reg.phone.includes(search)
+            );
+            renderTable(filtered);
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${day}/${month}/${year} ${hours}:${minutes}`;
+        }
+        
+        function copyLink(slug) {
+            const url = `${SITE_URL}/certificate.html?id=${slug}`;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('הקישור הועתק!');
+            });
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
+

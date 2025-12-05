@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>לב ללמידה - טופס הרשמה לקבוצות</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="logo.png" alt="לב ללמידה" class="logo">
+            <h1>טופס הרשמה לקבוצות</h1>
+            <div class="decorative-line"></div>
+        </header>
+
+        <form id="registrationForm" class="form">
+            <!-- פרטי התלמיד -->
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="title-icon">1</span>
+                    פרטי התלמיד/ה
+                </h2>
+                <div class="form-group">
+                    <label for="studentName">שם התלמיד/ה</label>
+                    <input type="text" id="studentName" name="studentName" required placeholder="הכנס/י את שם התלמיד/ה">
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">תאריך לידה</label>
+                    <input type="date" id="birthDate" name="birthDate" required>
+                </div>
+            </section>
+
+            <!-- פרטי ההורה -->
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="title-icon">2</span>
+                    פרטי ההורה
+                </h2>
+                <div class="form-group">
+                    <label for="parentName">שם ההורה</label>
+                    <input type="text" id="parentName" name="parentName" required placeholder="הכנס/י את שם ההורה">
+                </div>
+                <div class="form-group">
+                    <label for="phone">טלפון נייד</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="050-0000000" pattern="[0-9\-]{10,}">
+                </div>
+                <div class="form-group">
+                    <label for="email">כתובת אימייל</label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
+                </div>
+            </section>
+
+            <!-- מדיניות -->
+            <section class="form-section policy-section">
+                <h2 class="section-title">
+                    <span class="title-icon">3</span>
+                    מדיניות הרשמה, תשלום והתנהלות
+                </h2>
+                
+                <div class="policy-content">
+                    <div class="policy-header">
+                        <p class="policy-tagline">לב ללמידה – מרחב רגוע, מותאם ואישי לכל ילד</p>
+                    </div>
+                    
+                    <p class="policy-intro">בלב ללמידה אנחנו מאמינים שלכל ילד יש דרך ייחודית להתפתח, להבין ולגדול. המערכת שלנו מתאימה את עצמה לילד – ולא להפך. כדי לשמור על מרחב לימודי נעים, יציב ומכבד, נקבעה המדיניות הבאה.</p>
+
+                    <div class="policy-item">
+                        <h3>תשלום חודשי</h3>
+                        <ul>
+                            <li>התשלום מתבצע אחת לחודש עבור החודש הנוכחי.</li>
+                            <li>התשלום אינו יחסי ואינו תלוי במספר השיעורים שנכחו בפועל.</li>
+                            <li>הוא מייצג שמירה על מקום קבוע בקבוצה ועל רצף לימודי חשוב בהתפתחות הילד.</li>
+                            <li>במקרה של אי תשלום, ההשתתפות עשויה להיעצר עד להסדרת העניין.</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-item">
+                        <h3>נוכחות והיעדרויות</h3>
+                        <ul>
+                            <li>היעדרות של ילד מכל סיבה אינה מזכה בהחזר, זיכוי או שיעור השלמה.</li>
+                            <li>במקרים חריגים שאינם מאפשרים את קיום כלל השיעורים (כמו מצבי חירום או כוח עליון), נמשיך את הלמידה במתכונת מקוונת.</li>
+                            <li>שיעור מקוון נחשב כשיעור מלא לכל דבר.</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-item">
+                        <h3>שיעורים בחגים ובחופשות</h3>
+                        <ul>
+                            <li>השיעורים מתקיימים כרגיל גם בתקופות חגים, למעט הודעה אחרת.</li>
+                            <li>לעיתים המפגשים יכללו פעילויות מותאמות לחג – חווייתיות, יצירתיות ומגוונות.</li>
+                            <li>אין החזר או קיזוז בגין חגים.</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-item">
+                        <h3>סביבה לימודית רגישה ומותאמת</h3>
+                        <p>לב ללמידה פועל מתוך אהבה, סבלנות והבנה לעולמם של ילדים. אנו מקבלים תנועתיות, רגש, צורך בהפסקות, קשיים ואופי אישי – הכול חלק מהדרך שלהם.</p>
+                        <p>יחד עם זאת, כדי לשמור על מרחב מאפשר לכולם:</p>
+                        <ul>
+                            <li>אם התנהגות של ילד מקשה באופן ממשי על קיום השיעור הקבוצתי או פוגעת בחוויית הלמידה של אחרים, נעדכן את ההורים וניצור תכנית התנהלות משותפת.</li>
+                            <li>אם לאחר תהליך כזה ההתנהגות ממשיכה לפגוע במהלך השיעור, ייתכן שנבקש להפסיק את ההשתתפות בקבוצה.</li>
+                            <li>הפסקה כזו תתבצע רק בשיקול דעת מקצועי, רגיש ומתחשב.</li>
+                            <li>במקרה כזה לא יינתן החזר על החודש שבו הופסקה ההשתתפות.</li>
+                        </ul>
+                        <p class="policy-note">המטרה שלנו היא תמיד אחת – לשמור על לב פתוח, על למידה שמחה, ועל מרחב פורה לכולם.</p>
+                    </div>
+
+                    <div class="policy-item">
+                        <h3>שימוש באפליקציה של לב ללמידה</h3>
+                        <p>הקורס מלווה באפליקציית למידה שפיתחנו במיוחד עבור הילדים, כמערכת תרגול שמעמיקה את הלמידה ומאפשרת התקדמות עצמאית.</p>
+                        <ul>
+                            <li>השימוש באפליקציה הוא אישי ופרטי.</li>
+                            <li>אין להעביר שם משתמש או סיסמה לאדם אחר.</li>
+                            <li>שיתוף גישה פוגע בזכויות יוצרים ועלול לגרום לחסימת משתמש.</li>
+                            <li>במקרים חמורים תישקל פנייה משפטית, בהתאם לדין.</li>
+                        </ul>
+                        <p class="policy-note">הכול מתוך רצון לשמור על המרחב הדיגיטלי בטוח ומוגן לכל תלמיד.</p>
+                    </div>
+
+                    <div class="policy-item">
+                        <h3>ביטול השתתפות</h3>
+                        <ul>
+                            <li>הודעת ביטול נכנסת לתוקף בסוף אותו חודש.</li>
+                            <li>עזיבה באמצע חודש אינה מזכה בהחזר או קיזוז.</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-item">
+                        <h3>עדכון מדיניות</h3>
+                        <p>בלב ללמידה שומרים על שקיפות מלאה. במידת הצורך מדיניות זו תעודכן ותיכנס לתוקף בתחילת החודש שלאחר העדכון.</p>
+                    </div>
+                </div>
+
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="policyAgreement" name="policyAgreement" required>
+                    <label for="policyAgreement">קראתי את מדיניות ההרשמה, התשלום וההתנהלות ואני מאשר/ת את תנאיה</label>
+                </div>
+            </section>
+
+            <!-- חתימה -->
+            <section class="form-section signature-section">
+                <h2 class="section-title">
+                    <span class="title-icon">4</span>
+                    חתימת ההורה
+                </h2>
+                <p class="signature-instruction">אנא חתמו באצבע במסגרת למטה</p>
+                <div class="signature-wrapper">
+                    <canvas id="signatureCanvas"></canvas>
+                    <button type="button" id="clearSignature" class="btn-clear">נקה חתימה</button>
+                </div>
+                <input type="hidden" id="signatureData" name="signatureData">
+            </section>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <span class="btn-text">שליחת טופס הרשמה</span>
+                <span class="btn-loader" style="display: none;">שולח...</span>
+            </button>
+        </form>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message" style="display: none;">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <h2>ההרשמה התקבלה בהצלחה!</h2>
+            <p>קובץ PDF עם פרטי ההרשמה נשלח לכתובת המייל שציינת.</p>
+            <p>נשמח לראותכם בשיעורים!</p>
+        </div>
+
+        <footer class="footer">
+            <p>לב ללמידה - כל הזכויות שמורות</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
