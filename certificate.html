@@ -573,10 +573,11 @@
         let slug = null;
         const pathMatch = window.location.pathname.match(/\/certificate\/(.+)/);
         if (pathMatch) {
-            slug = pathMatch[1];
+            slug = decodeURIComponent(pathMatch[1]);
         } else {
             const urlParams = new URLSearchParams(window.location.search);
             slug = urlParams.get('id');
+            if (slug) slug = decodeURIComponent(slug);
         }
         
         // Format date functions
