@@ -3,9 +3,8 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/certificate/:id",
-      "destination": "/certificate.html?id=:id"
+      "source": "/certificate/:slug",
+      "destination": "/certificate?id=:slug"
     }
   ]
 }
-
