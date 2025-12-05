@@ -569,9 +569,15 @@
         const SUPABASE_URL = 'https://kyhlbkgkqrraaugosvya.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5aGxia2drcXJyYWF1Z29zdnlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ5MDQ5NjMsImV4cCI6MjA4MDQ4MDk2M30.Yz3k-m64C-Vlye01Qji69ELdYcWIcJilQ5VucGwZwIg';
         
-        // Get slug from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const slug = urlParams.get('id');
+        // Get slug from URL (supports both /certificate/slug and ?id=slug)
+        let slug = null;
+        const pathMatch = window.location.pathname.match(/\/certificate\/(.+)/);
+        if (pathMatch) {
+            slug = pathMatch[1];
+        } else {
+            const urlParams = new URLSearchParams(window.location.search);
+            slug = urlParams.get('id');
+        }
         
         // Format date functions
         function formatDateShort(dateString) {

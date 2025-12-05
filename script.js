@@ -330,7 +330,7 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
         
         // Generate unique slug
         const slug = generateSlug(formData.studentName);
-        const certificateUrl = `${SITE_URL}/certificate.html?id=${slug}`;
+        const certificateUrl = `${SITE_URL}/certificate/${slug}`;
         
         // Save to Supabase
         await saveToSupabase(formData, slug);

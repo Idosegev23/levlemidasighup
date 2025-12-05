@@ -547,7 +547,7 @@
                     <td><a href="mailto:${reg.email}">${reg.email}</a></td>
                     <td class="date-cell">${formatDate(reg.created_at)}</td>
                     <td>
-                        <a href="${SITE_URL}/certificate.html?id=${reg.student_slug}" target="_blank" class="cert-link">
+                        <a href="${SITE_URL}/certificate/${reg.student_slug}" target="_blank" class="cert-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                 <polyline points="15 3 21 3 21 9"></polyline>
@@ -597,7 +597,7 @@
         }
         
         function copyLink(slug) {
-            const url = `${SITE_URL}/certificate.html?id=${slug}`;
+            const url = `${SITE_URL}/certificate/${slug}`;
             navigator.clipboard.writeText(url).then(() => {
                 showToast('הקישור הועתק!');
             });
